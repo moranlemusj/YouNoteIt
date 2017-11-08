@@ -1,0 +1,20 @@
+{
+  "name": "padtube",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "meteor-node-stubs": "^0.3.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-mounter": "^1.2.0"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
