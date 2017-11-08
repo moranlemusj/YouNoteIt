@@ -2,6 +2,15 @@ import React from 'react';
 
 export const MainLayout = ({content}) => (
   <div className="main-layout">
-    {content}
+    <header>
+      <h2> PadTube </h2>
+      <nav>
+        <a href = "/"> Notes </a>
+        <a href = "/about"> About </a>
+      </nav>
+    </header>
+    <main>
+      {content}
+    </main>
   </div>
 )
