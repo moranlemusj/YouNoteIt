@@ -4,7 +4,7 @@ export default class NoteForm extends Component {
   addNote(event) {
     event.preventDefault();
     let text = this.refs.note.value.trim();
-    let time = 0;
+    let time = 10;
     Meteor.call('addNote', text, time, () => {
       this.refs.note.value = '';
     });

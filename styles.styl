@@ -241,18 +241,44 @@ input:-ms-input-placeholder
     margin 40px 0 
     lost-center 700px
     li
+        border red
         font-size 1.1em 
-        margin-bottom 10px 
+        margin-bottom 10px
         input
             margin-right 10px 
         &.checked
             color #CCC 
-        button
-            padding 10px
-            margin-left 40px  
-            line-height 0.5 
-            float right
+        .note
+            font-size 1em
+            display flex
+            justify-content space-between
+            .singleNote
+                max-width 500px
+                .boldThis
+                    font-weight bold
+                    font-size 1.2em
+            .cancel
+                float right
+                height 1.2em
+                width 1em
+                font-size 1em
+                border 1px
+                padding 0
+                opacity .6
     
+            
+        .time
+            font-size .6em
+            max-width 80%
+        .goButton
+            height 1em
+            font-size .2em
+            line-height 0.5
+            padding 7px 10px
+            margin-left 5px
+            border none 
+            background-color red
+            float none
 .panel-body
     .form-group
         lost-column 1/2 

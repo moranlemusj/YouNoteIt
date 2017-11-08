@@ -10,6 +10,20 @@ Notes = new Mongo.Collection('notes');
 
 
 export default class NotesContainer extends TrackerReact(React.Component) {
+  constructor() {
+    super();
+    
+    this.state =  {
+      //"notes:" doesn't matter
+      subscription: {
+        sack: Meteor.subscribe("allNotes")
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.state.subscription.notes.stop();
+  }
 
   notes() {
     //fetch gives object, find a cursor;

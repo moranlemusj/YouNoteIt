@@ -9,5 +9,9 @@ Meteor.methods({
       user: 'ZeroBrane',
       video: 'LvlUp Tutorial',
     });
+  },
+  deleteNote(note) {
+    console.log(note);
+    Notes.remove(note);
   }
 });
