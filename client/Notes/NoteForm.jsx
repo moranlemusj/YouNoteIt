@@ -3,9 +3,11 @@ import React, {Component} from 'react';
 export default class NoteForm extends Component {
   addNote(event) {
     event.preventDefault();
+    // console.log(player.getCurrentTime():Number);
     let text = this.refs.note.value.trim();
-    let time = 10;
-    Meteor.call('addNote', text, time, () => {
+    let time = this.props.player.getCurrentTime() || 0;
+    let video = this.props.video;
+    Meteor.call('addNote', text, time, video, () => {
       this.refs.note.value = '';
     });
   }
