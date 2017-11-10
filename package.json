@@ -8,6 +8,11 @@
     "babel-runtime": "^6.26.0",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.0.0",
+    "react-addons": "^0.9.1-deprecated",
+    "react-addons-create-fragment": "^15.6.2",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-addons-linked-state-mixin": "^15.6.2",
+    "react-addons-transition-group": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-mounter": "^1.2.0",
     "react-youtube": "^7.5.0"
