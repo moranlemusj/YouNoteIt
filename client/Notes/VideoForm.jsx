@@ -36,13 +36,20 @@ export default class VideoForm extends Component {
       Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
     }
   }
-  componentWillMount() {
-    let x = this.props.initialUrl || '';
-    if (x) {
-      this.props.setVideo(x);
-    }
-    this.setState({...this.state, url: x});
+  componentDidMount() {
+    let self = this;
+    Tracker.autorun(function(){
+        console.log(self.props)
+        let x = self.props.initialUrl;
+        self.setState({...self.state,
+          url: x
+        })
+        console.log(self.state);
+        self.props.setVideo(x);
+        FlowRouter.watchPathChange();
+    })
   }
+
   render() {
     const video = (this.state.url && Meteor.userId()) ?
           <YouTube ref="player" videoId={this.state.url} 

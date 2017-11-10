@@ -3,10 +3,8 @@ import React, {Component} from 'react';
 export default class SingleVideo extends Component {
   sendToSingle() {
     FlowRouter.go(`/single/${this.props.video.vidId}`);
-    console.log(this.props.video.vidId);
   }
   render () {
-    console.log('single', this.props.video);
     const url = `http://img.youtube.com/vi/${this.props.video.vidId}/1.jpg`
     return (
       <li>

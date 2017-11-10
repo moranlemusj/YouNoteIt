@@ -38,6 +38,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     this.setState({...this.state,
       notes: Meteor.subscribe("usersNotes", url),
       currentVideo: url,
+      player: false
     })
   }
 

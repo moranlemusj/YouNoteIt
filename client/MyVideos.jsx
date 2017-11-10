@@ -30,7 +30,6 @@ export default class MyVideos extends TrackerReact(Component) {
     })
     let videosArray = [];
     for (video in videos) {
-      console.log('array', videos[video]);
       videosArray.push({video: video, counter: videos[video]['counter'], vidId: videos[video]['id'] })
     }
     return videosArray;
@@ -41,17 +40,11 @@ export default class MyVideos extends TrackerReact(Component) {
       <div>
         <ul>
           {this.uniqueVideos().map(video =>
-          <SingleVideo key = {video.counter}
+          <SingleVideo key = {video.vidId}
                        video = {video}
                        player = {this.state.player} />
           )}
         </ul>
-
-        {/* <h1>My Watched Videos</h1>
-        {this.uniqueVideos().map(video => {
-          console.log(video.video);
-          <div>Title: {video.video} # of Notes: {video.counter} </div>
-        })} */}
       </div>
     )
   }

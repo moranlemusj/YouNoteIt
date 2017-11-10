@@ -39,6 +39,14 @@ FlowRouter.route('/single/:id', {
   }
 });
 
+FlowRouter.route('/single/', {
+  action() {
+    mount(MainLayout, {
+      content: (<NotesContainer />)
+    })
+  }
+});
+
 FlowRouter.route('/videos', {
   action() {
     mount(MainLayout, {
