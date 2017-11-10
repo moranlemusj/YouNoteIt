@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //allows for data handling
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
+import Keypress from 'react-keypress';
 
 import NoteForm from './NoteForm.jsx';
 import NoteSingle from './NoteSingle.jsx';
@@ -24,7 +25,13 @@ export default class NotesContainer extends TrackerReact(React.Component) {
       time: 0,
     }
   }
-
+  stopV() {
+    console.log("stop", this);
+    this.state.player.pauseVideo();
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', Keypress("command e", this.stopV.bind(this)))
+  }
   componentWillUnmount() {
     this.state.subscription.notes.stop();
     this.setState({...this.state,
