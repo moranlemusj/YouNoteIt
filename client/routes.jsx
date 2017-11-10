@@ -31,10 +31,10 @@ function routeCleanup() {
   fireReload = !fireReload;
 }
 
-FlowRouter.route('/', {
-  action() {
+FlowRouter.route('/single/:id', {
+  action(params) {
     mount(MainLayout, {
-      content: (<NotesContainer />)
+      content: (<NotesContainer id={params.id}/>)
     })
   }
 });
@@ -54,4 +54,3 @@ FlowRouter.route('/about', {
     })
   }
 });
-

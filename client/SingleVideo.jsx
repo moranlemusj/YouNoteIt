@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 export default class SingleVideo extends Component {
+  sendToSingle() {
+    FlowRouter.go(`/single/${this.props.video.vidId}`);
+    console.log(this.props.video.vidId);
+  }
   render () {
     console.log('single', this.props.video);
     const url = `http://img.youtube.com/vi/${this.props.video.vidId}/1.jpg`
@@ -14,7 +18,7 @@ export default class SingleVideo extends Component {
         </div>
         <div className = "time">
           Notes: {this.props.video.counter}
-          <button className = "goButton"> Go! </button>
+          <button className = "goButton" onClick={this.sendToSingle.bind(this)}> Go! </button>
         </div>
       </li>
     )

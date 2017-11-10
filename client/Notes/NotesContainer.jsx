@@ -61,7 +61,8 @@ export default class NotesContainer extends TrackerReact(React.Component) {
               <h4> {this.state.player.getVideoData().author}</h4>
             </div> : <h1>Enter video link</h1>}
         <VideoForm getVideo = {this.getVideo.bind(this)} 
-                   setVideo = {this.setVideo.bind(this)} />
+                   setVideo = {this.setVideo.bind(this)} 
+                   initialUrl = {this.props.id}/>
         <br />
         <br />
         <NoteForm video = {this.state.currentVideo} 

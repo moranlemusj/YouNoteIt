@@ -4,7 +4,6 @@ import YouTube from 'react-youtube';
 export default class VideoForm extends Component {
   constructor() {
     super();
-    
     this.state =  {
       url: '',
     }
@@ -37,7 +36,13 @@ export default class VideoForm extends Component {
       Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
     }
   }
-
+  componentWillMount() {
+    let x = this.props.initialUrl || '';
+    if (x) {
+      this.props.setVideo(x);
+    }
+    this.setState({...this.state, url: x});
+  }
   render() {
     const video = (this.state.url && Meteor.userId()) ?
           <YouTube ref="player" videoId={this.state.url} 
