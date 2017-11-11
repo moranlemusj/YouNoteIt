@@ -1,5 +1,11 @@
 normalize-css()
 
+@font-face
+    font-family fibre
+    font-style normal
+    src url(./fonts/fibre/fibre-font.woff)
+.ingeo
+    font-family fibre
 // Material Shadows
 shadow-level(l = 1)
     if l == -1
@@ -76,7 +82,7 @@ html
 body
     background light-grey
     padding: 70px 0 150px
-    font-family: 'Open Sans', sans-serif
+    font-family fibre
 .bert-alert
     background black !important
 header
@@ -90,9 +96,8 @@ header
     shadow-level(2)
     clearfix()
     h2
-        margin 0
-        font-weight 100 
-        font-size 1.6em 
+        margin-top -12px
+        font-size 4em 
         float left
     nav
         float right
@@ -123,6 +128,12 @@ p
     +above($large)
         lost-center 70%
         margin-top 40px
+    iframe
+        margin-left 10%
+    .comicRow
+        display flex
+        justify-content space-around
+        margin-bottom 15px
 .btn, button
     display inline-block
     cursor pointer
@@ -194,8 +205,9 @@ p
 
 input, select, textarea
     color purp
-    background #FFF
-    border solid 2px light-grey
+    background light-grey
+    border none
+    box-shadow none !important
     border-radius 2px
     font-weight 800
     padding 6px 10px

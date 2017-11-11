@@ -20,7 +20,7 @@ export default class NoteForm extends Component {
   }
 
   render() {
-    const notef = (this.props.player) ?         
+    const notef = (this.props.player && this.props.id) ?         
                     <form className="new-note" onSubmit={this.addNote.bind(this)}>
                       <input type="text" ref="note"
                              placeholder="Jot it down, press Enter to record!" />

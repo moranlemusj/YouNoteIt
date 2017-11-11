@@ -17,7 +17,10 @@ export default class MyVideos extends TrackerReact(Component) {
       time: 0,
     }
   }
-
+  
+  componentWillMount() {
+    document.removeEventListener('keydown', this.togglePlayEventListener);
+  }
   componentWillUnmount() {
     this.state.subscription.videos.stop();
   }

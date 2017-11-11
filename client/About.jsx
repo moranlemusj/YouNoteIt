@@ -12,6 +12,13 @@ export default class About extends Component {
         <p>
           Create an account, copy a video link and enjoy!
         </p>
+        <h3> Custom Commands</h3>
+        <ul>
+          <li> 
+            <p>' Command + / ' => stop video!</p>
+            <p>This will work as long as the youtube player is not select. If it is, use spacebar to pause the video just like in YouTube. </p>
+          </li>
+        </ul>
       </div>
     )
   }

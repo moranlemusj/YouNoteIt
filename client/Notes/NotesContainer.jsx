@@ -21,38 +21,53 @@ export default class NotesContainer extends TrackerReact(React.Component) {
         notes: Meteor.subscribe("usersNotes", '')
       },
       currentVideo: '',
-      player: false,
+      player: null,
       time: 0,
     }
+
+    this.togglePlayEventListener = Keypress("cmd /", this.stopV.bind(this));
   }
+
   stopV() {
-    console.log("stop", this);
-    this.state.player.pauseVideo();
+    if (this.state.player.getPlayerState() === 1) {
+      this.state.player.pauseVideo();
+    } else {
+    this.state.player.playVideo();
+    }
   }
+
+  componentWillMount() {
+    console.log('[banana] will', this.state, this.state.subscription)
+    if(this.state && this.state.subscription) {
+      this.state.subscription.notes.stop();
+    }
+  }
+
   componentDidMount() {
-    document.addEventListener('keydown', Keypress("command e", this.stopV.bind(this)))
+    document.addEventListener('keydown', this.togglePlayEventListener)
   }
+  
   componentWillUnmount() {
+    console.log('[banana]', 'here');
     this.state.subscription.notes.stop();
-    this.setState({...this.state,
+    this.setState({
       notes: Meteor.subscribe("usersNotes", ''),
       currentVideo: '',
     })
+    document.removeEventListener('keydown', this.togglePlayEventListener);
   }
 
   setVideo(url) {
-    this.state.subscription.notes.stop();
-    this.setState({...this.state,
-      notes: Meteor.subscribe("usersNotes", url),
-      currentVideo: url,
-      player: false
-    })
-  }
-
-  getVideo(player) {
-    this.setState({...this.state,
-      player: player
-    });
+    if (!this.state.currentVideo) {
+      this.state.subscription.notes.stop();
+      console.log('[banana] set', url, this.state);
+      FlowRouter.go(`/single/${url}`)
+      this.setState({
+        notes: Meteor.subscribe("usersNotes", url),
+        currentVideo: url,
+      })
+    }
+    console.log('[banana] set after', url, this.state);
   }
 
   notes() {
@@ -60,23 +75,39 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     return Notes.find().fetch();
   }
   
+  setPlayer = (player) => {
+    this.setState({ player });
+  }
+  
   render() {
     return (
       <div>
-        {this.state.player ? 
+        {(this.state.player && this.props.id) ? 
             <div> 
               <h1> {this.state.player.getVideoData().title} </h1>
               <h4> {this.state.player.getVideoData().author}</h4>
-            </div> : <h1>Enter video link</h1>}
-        <VideoForm getVideo = {this.getVideo.bind(this)} 
-                   setVideo = {this.setVideo.bind(this)} 
-                   initialUrl = {this.props.id}/>
+            </div> : <h1>Enter video url</h1>}
+        <VideoForm setVideo = {this.setVideo.bind(this)} 
+                   initialUrl = {this.props.id}
+                   player={this.state.player}
+                   onSetPlayer={this.setPlayer} />
         <br />
         <br />
         <NoteForm video = {this.state.currentVideo} 
                   time = {this.state.time} 
-                  player = {this.state.player} />
-        <h3> {this.state.player ? 'Notes for Video' : ''} </h3>
+                  player = {this.state.player}
+                  id = {this.props.id} />
+        {(this.state.player && this.props.id) ? <h3> 'Notes for Video'</h3> :
+        <div>
+          <div className = "comicRow">
+            <img src="./images/1.jpg" height="200" />
+            <img src="./images/2.jpg" height="200" />
+          </div>
+          <div className = "comicRow">
+            <img src="./images/3.jpg" height="200" />
+            <img src="./images/4.jpg" height="200" />
+          </div>
+        </div>}
         <ul className = "notes">
           {this.state.currentVideo ? this.notes().reverse().map( note => 
             <NoteSingle key = {note._id} 

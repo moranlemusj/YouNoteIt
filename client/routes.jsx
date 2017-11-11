@@ -33,17 +33,20 @@ function routeCleanup() {
 
 FlowRouter.route('/single/:id', {
   action(params) {
+    //being called twice with previous vid id
+    console.log('[banana]', params)
     mount(MainLayout, {
       content: (<NotesContainer id={params.id}/>)
     })
   }
 });
 
-FlowRouter.route('/single/', {
+FlowRouter.route('/home/', {
   action() {
     mount(MainLayout, {
-      content: (<NotesContainer />)
+      content: ''
     })
+    FlowRouter.redirect('/')
   }
 });
 
