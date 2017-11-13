@@ -37,7 +37,6 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   }
 
   componentWillMount() {
-    console.log('[banana] will', this.state, this.state.subscription)
     if(this.state && this.state.subscription) {
       this.state.subscription.notes.stop();
     }
@@ -48,7 +47,6 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   }
   
   componentWillUnmount() {
-    console.log('[banana]', 'here');
     this.state.subscription.notes.stop();
     this.setState({
       notes: Meteor.subscribe("usersNotes", ''),
@@ -60,14 +58,12 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   setVideo(url) {
     if (!this.state.currentVideo) {
       this.state.subscription.notes.stop();
-      console.log('[banana] set', url, this.state);
       FlowRouter.go(`/single/${url}`)
       this.setState({
         notes: Meteor.subscribe("usersNotes", url),
         currentVideo: url,
       })
     }
-    console.log('[banana] set after', url, this.state);
   }
 
   notes() {
@@ -87,17 +83,19 @@ export default class NotesContainer extends TrackerReact(React.Component) {
               <h1> {this.state.player.getVideoData().title} </h1>
               <h4> {this.state.player.getVideoData().author}</h4>
             </div> : <h1>Enter video url</h1>}
-        <VideoForm setVideo = {this.setVideo.bind(this)} 
+        <VideoForm className = 'circular'
+                   setVideo = {this.setVideo.bind(this)} 
                    initialUrl = {this.props.id}
                    player={this.state.player}
                    onSetPlayer={this.setPlayer} />
         <br />
         <br />
-        <NoteForm video = {this.state.currentVideo} 
+        <NoteForm className = 'circular'
+                  video = {this.state.currentVideo} 
                   time = {this.state.time} 
                   player = {this.state.player}
                   id = {this.props.id} />
-        {(this.state.player && this.props.id) ? <h3> 'Notes for Video'</h3> :
+        {(this.state.player && this.props.id) ? <h3> Notes for Video</h3> :
         <div>
           <div className = "comicRow">
             <img src="./images/1.jpg" height="200" />
@@ -109,7 +107,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
           </div>
         </div>}
         <ul className = "notes">
-          {this.state.currentVideo ? this.notes().reverse().map( note => 
+          {(this.state.player && this.props.id) ? this.notes().reverse().map( note => 
             <NoteSingle key = {note._id} 
                         note = {note} 
                         player = {this.state.player} />

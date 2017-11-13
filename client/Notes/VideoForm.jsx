@@ -27,15 +27,12 @@ export default class VideoForm extends Component {
   }
 
   onLoad = (event) => {
-    console.log('[banana] on load', event.target.getVideoData().video_id)
     try { 
       // console.log('load player',event.target.getVideoData());
       if (event.target.getVideoData().video_id) {
-        console.warn('[banana] bim', event.target.getVideoData().video_id);
         event.target.seekTo(1, true);
         this.props.onSetPlayer(event.target);
       } else {
-        console.log('[banana] bam');
         this.setState({
           url: ''
         });
@@ -48,22 +45,14 @@ export default class VideoForm extends Component {
 
   componentDidMount() {
     Tracker.autorun(() => {
-    console.log('First', FlowRouter.current().path, FlowRouter.current().path !== '/videos');
-    //BROKEN! USE REGEX TO MATCH SINGLE AND ONLY EXECUTE IF IT MATCHES! Broken when tries to go to home page, can fix with this matching sitch, maybe bracket?
-    if (this.props.initialUrl && (FlowRouter.current().path.match('/single/'))) {
-      console.log('this', this)
-      console.log('this.state', this.state);
-      console.log('this.props', this.props)
-      let x = this.props.initialUrl;
-      this.setState({
-        url: x,
-      })
-      console.log('after setState', this);
-      console.log(x)
-      console.log('[banana] calling set video')
-      this.props.setVideo(x);
-    }
-      FlowRouter.watchPathChange();
+      if (this.props.initialUrl && (FlowRouter.current().path.match('/single/'))) {
+        let x = this.props.initialUrl;
+        this.setState({
+          url: x,
+        })
+        this.props.setVideo(x);
+      }
+    FlowRouter.watchPathChange();
     })
   }
 

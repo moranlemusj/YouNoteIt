@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 export default class SingleVideo extends Component {
   sendToSingle() {
-    // console.log('[banana]', this.props)
     FlowRouter.redirect(`/single/${this.props.video.vidId}`);
   }
   render () {
@@ -17,7 +16,7 @@ export default class SingleVideo extends Component {
         </div>
         <div className = "time">
           Notes: {this.props.video.counter}
-          <button className = "goButton" onClick={this.sendToSingle.bind(this)}> Go! </button>
+          <button className = "goButton-vid" onClick={this.sendToSingle.bind(this)}> Go! </button>
         </div>
       </li>
     )

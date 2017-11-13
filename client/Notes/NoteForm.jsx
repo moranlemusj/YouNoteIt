@@ -4,7 +4,6 @@ export default class NoteForm extends Component {
   addNote(event) {
     event.preventDefault();
     let vidId = this.props.player.getVideoData().video_id;
-    console.log(vidId);
     let title = this.props.player.getVideoData().title;
     let text = this.refs.note.value.trim();
     let secs = Math.round(this.props.player.getCurrentTime() - 20)

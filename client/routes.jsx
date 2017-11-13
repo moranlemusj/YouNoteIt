@@ -21,7 +21,6 @@ FlowRouter.route('/', {
 
 function reloadCheck(context, redirect, stop) {
   if (fireReload) {
-    console.log('Reloading ...');
     FlowRouter.reload();
     stop();
   }
@@ -34,7 +33,6 @@ function routeCleanup() {
 FlowRouter.route('/single/:id', {
   action(params) {
     //being called twice with previous vid id
-    console.log('[banana]', params)
     mount(MainLayout, {
       content: (<NotesContainer id={params.id}/>)
     })

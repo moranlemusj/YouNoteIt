@@ -22,6 +22,8 @@ shadow-level(l = 1)
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     if l == 5
         box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    if l == 6
+        box-shadow: 0 3px 0 rgba(0,0,0,0.19)
 
 // Common Transition
 trans($sec = 0.3s)
@@ -202,16 +204,13 @@ p
             opacity 1
             shadow-level(2)
             border-color @background
-
 input, select, textarea
-    color purp
+    outline 0
     background light-grey
     border none
-    box-shadow none !important
-    border-radius 2px
     font-weight 800
     padding 6px 10px
-    margin-bottom 10px  
+    margin-bottom 30px  
 
 input::-webkit-input-placeholder
     color: #ddd
@@ -224,7 +223,8 @@ input:-ms-input-placeholder
 
 .new-note
     transition all 0.3s cubic-bezier(0.86, 0, 0.07, 1)
-    shadow-level(3)
+    shadow-level(6)
+    margin-bottom 30px
     &:hover
         shadow-level(5)
     label
@@ -244,7 +244,7 @@ input:-ms-input-placeholder
         font-weight 800
         color #333
         border none
-        padding 30px
+        padding 30px 0 0 10px
 
 .notes
     list-style none
@@ -291,6 +291,15 @@ input:-ms-input-placeholder
             border none 
             background-color red
             float none
+ul
+    li
+        margin-bottom 20px
+.goButton-vid
+    background-color red
+    border none
+    font-size .8em
+    padding 3px 15px
+    margin-left 10px
 .panel-body
     .form-group
         lost-column 1/2 

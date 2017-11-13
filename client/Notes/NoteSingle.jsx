@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 export default class NoteSingle extends Component {
   sendToVideo() {
-    console.log("Send to Time in Video", this.props.note.seconds);
     this.props.player.seekTo(this.props.note.seconds, true);
   }
 
