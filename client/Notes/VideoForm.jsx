@@ -27,7 +27,7 @@ export default class VideoForm extends Component {
   }
 
   onLoad = (event) => {
-    try { 
+    try {
       // console.log('load player',event.target.getVideoData());
       if (event.target.getVideoData().video_id) {
         event.target.seekTo(1, true);

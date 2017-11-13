@@ -9,7 +9,8 @@ export default class NoteForm extends Component {
     let secs = Math.round(this.props.player.getCurrentTime() - 20)
     let time = (secs > 0) ? secs : 0;
     let video = this.props.video;
-    Meteor.call('addNote', text, time, video, title, vidId, (error, data) => {
+    let update = false;
+    Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
       if (error) {
         Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
       } else {

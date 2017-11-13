@@ -16,7 +16,6 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     super();
     
     this.state =  {
-      //"notes:" doesn't matter
       subscription: {
         notes: Meteor.subscribe("usersNotes", '')
       },
@@ -28,11 +27,16 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     this.togglePlayEventListener = Keypress("cmd /", this.stopV.bind(this));
   }
 
+  statePlayerMe() {
+    return this.state.player;
+  }
+
   stopV() {
-    if (this.state.player.getPlayerState() === 1) {
-      this.state.player.pauseVideo();
+    let self = this.statePlayerMe();
+    if (self.getPlayerState() === 1) {
+      self.pauseVideo();
     } else {
-    this.state.player.playVideo();
+    self.playVideo();
     }
   }
 
@@ -40,10 +44,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     if(this.state && this.state.subscription) {
       this.state.subscription.notes.stop();
     }
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.togglePlayEventListener)
+    document.addEventListener('keydown', this.togglePlayEventListener);
   }
   
   componentWillUnmount() {
@@ -58,7 +59,8 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   setVideo(url) {
     if (!this.state.currentVideo) {
       this.state.subscription.notes.stop();
-      FlowRouter.go(`/single/${url}`)
+      //test without this
+      FlowRouter.go(`/single/${url}`) 
       this.setState({
         notes: Meteor.subscribe("usersNotes", url),
         currentVideo: url,
@@ -73,6 +75,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   
   setPlayer = (player) => {
     this.setState({ player });
+    console.log('state set', this.state)
   }
   
   render() {

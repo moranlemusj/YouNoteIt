@@ -1,13 +1,10 @@
 Notes = new Mongo.Collection("notes");
 //if susbscribe to allNotes, gives me all notes.
-Meteor.publish('allNotes', function() {
-  return Notes.find({seconds:10});
-})
 
 Meteor.publish('usersVideos', function() {
   return Notes.find({user: this.userId});
 })
 
 Meteor.publish('usersNotes', function(video) {
-  return Notes.find({user: this.userId, video: video});
+  return Notes.find({user: this.userId, video: video}, {sort: {seconds: -1}});
 })
