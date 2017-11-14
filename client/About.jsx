@@ -25,7 +25,7 @@ export default class About extends Component {
                   If you want to change this, adjust the rewind value. </p>
               </li>
               <li>
-                <p> Markers are now available! Empty and empty note, and a marker will be created. </p>
+                <p> Markers are now available! Add an empty note, and a marker will be created. </p>
               </li>
               <li>
                 <p> Please don't use the browser navigation methods. Navigate the page through 
