@@ -26,6 +26,8 @@ export default class NoteSingle extends Component {
     this.setState({update: false});
   }
   render () {
+    const marker = (this.props.note.text) ? <div><span className= "boldThis"> Note: </span> {this.props.note.text}</div> :
+      <span className = "boldThis"> ----- Marker ----- </span>
     const notes = (this.props.note.update) ?
     <li>         
       <form className="new-note" onSubmit={this.updateText.bind(this)}>
@@ -36,7 +38,7 @@ export default class NoteSingle extends Component {
     <li>
         <div className="note">
           <div className="singleNote">
-              <span className= "boldThis">Note: </span> {this.props.note.text}
+              {marker}
           </div>
             <button className = "btn-cancel cancel" onClick={this.deleteNote.bind(this)}> &times; </button>
         </div>

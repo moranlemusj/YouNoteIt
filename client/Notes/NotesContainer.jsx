@@ -49,11 +49,11 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   
   componentWillUnmount() {
     this.state.subscription.notes.stop();
+    document.removeEventListener('keydown', this.togglePlayEventListener);
     this.setState({
       notes: Meteor.subscribe("usersNotes", ''),
       currentVideo: '',
     })
-    document.removeEventListener('keydown', this.togglePlayEventListener);
   }
 
   setVideo(url) {
@@ -92,7 +92,6 @@ export default class NotesContainer extends TrackerReact(React.Component) {
         <VideoForm className = 'circular'
                    setVideo = {this.setVideo.bind(this)} 
                    initialUrl = {this.props.id}
-                   player={this.state.player}
                    onSetPlayer={this.setPlayer}
                    setVideoData = {this.setVideoData} />
         <br />

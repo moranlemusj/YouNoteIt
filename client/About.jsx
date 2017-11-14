@@ -6,8 +6,9 @@ export default class About extends Component {
       <div>
         <h1>About YouNoteIt</h1>
         <p> 
-          PadTube is an application designed with the goal of enhancig YouTube tutorials. It allows you to take notes while watching
-          a tutorial, and then, let's you go back to the exact moment in the video when you took the note, without any hazzle!
+          PadTube is an application designed with the goal of enhancig YouTube tutorials. 
+          It allows you to take notes while watching a tutorial, and then, 
+          let's you go back to the exact moment in the video when you took the note, without any hazzle!
         </p>
         <p>
           Create an account, copy a video link and enjoy!
@@ -15,7 +16,19 @@ export default class About extends Component {
         <h3> Info</h3>
             <ul>
               <li>
-                <p>For convenience, new notes are displayed at the top of the list, but notes are sorted when the video is revisited!</p>
+                <p>For convenience, new notes are displayed at the top of the list, 
+                  but notes are sorted when the video is revisited!</p>
+              </li>
+              <li>
+                <p>When revisiting a note, the video will playback 15 seconds before 
+                  the moment the note was submitted, so as to capture most of the context.</p>
+              </li>
+              <li>
+                <p> Markers are now available! Empty and empty note, and a marker will be created. </p>
+              </li>
+              <li>
+                <p> Please don't use the browser navigation methods. Navigate the page through 
+                  our navbar, Thank you! </p>
               </li>
             </ul>
       </div>
