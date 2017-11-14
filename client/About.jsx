@@ -20,8 +20,9 @@ export default class About extends Component {
                   but notes are sorted when the video is revisited!</p>
               </li>
               <li>
-                <p>When revisiting a note, the video will playback 15 seconds before 
-                  the moment the note was submitted, so as to capture most of the context.</p>
+                <p>When revisiting a note, the video will playback (by default) 15 seconds before 
+                  the moment the note was submitted, so as to capture most of the context. 
+                  If you want to change this, adjust the rewind value. </p>
               </li>
               <li>
                 <p> Markers are now available! Empty and empty note, and a marker will be created. </p>

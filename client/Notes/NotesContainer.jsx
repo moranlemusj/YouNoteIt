@@ -101,8 +101,13 @@ export default class NotesContainer extends TrackerReact(React.Component) {
                   time = {this.state.time} 
                   player = {this.state.player}
                   title = {this.state.title}
-                  id = {this.props.id} />
-        {(this.state.player && this.props.id) ? <h3> Notes for Video</h3> :
+                  id = {this.props.id}
+                  seconds = {this.refs.time} />
+        {(this.state.player && this.props.id) ? 
+          <div className = 'rewind'>
+            <div className = 'title'><h3> Notes for Video</h3></div>
+            <div className = 'rewind2'><h5> Rewind: </h5> <input ref='time' type='number' defaultValue={15} /></div>
+          </div> :
         <div>
           <div className = "comicRow">
             <img src="./images/1.jpg" height="200" />
