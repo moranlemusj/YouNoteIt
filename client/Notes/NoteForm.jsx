@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 export default class NoteForm extends Component {
   addNote(event) {
     event.preventDefault();
-    let vidId = this.props.player.getVideoData().video_id;
-    let title = this.props.player.getVideoData().title;
+    console.log(this.props.id)
+    let vidId = this.props.id;
+    let title = this.props.title;
     let text = this.refs.note.value.trim();
     let secs = Math.round(this.props.player.getCurrentTime() - 20)
     let time = (secs > 0) ? secs : 0;

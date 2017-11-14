@@ -101,6 +101,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
                   video = {this.state.currentVideo} 
                   time = {this.state.time} 
                   player = {this.state.player}
+                  title = {this.state.title}
                   id = {this.props.id} />
         {(this.state.player && this.props.id) ? <h3> Notes for Video</h3> :
         <div>
