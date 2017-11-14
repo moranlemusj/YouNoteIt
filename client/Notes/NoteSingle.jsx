@@ -16,7 +16,6 @@ export default class NoteSingle extends Component {
   }
 
   updateNote() {
-    console.log(this);
     this.setState({update: true})
     this.props.note.update = !this.props.note.update;
   }

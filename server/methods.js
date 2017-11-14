@@ -1,4 +1,17 @@
+
 //methods that can be called from client side
+import { HTTP } from 'meteor/http';
+
+const callService = (type, url, options) => new Promise((resolve, reject) => {
+  HTTP.call(type, url, (error, result) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(result);
+    }
+  });
+});
+
 Meteor.methods({
   addNote(note, time, video, title, vidId, update) {
     if(!Meteor.userId()) {
@@ -31,5 +44,13 @@ Meteor.methods({
     Notes.update(id, {
       $set: {text: text}
     })
+  },
+  getVideoData(url) {
+    return callService(
+      'GET',
+      `https://www.googleapis.com/youtube/v3/videos?id=${url}&key=AIzaSyBRrQmXEXUOOYkXW_sa7Gd5dGJJkEbiT_Q&fields=items(snippet)&part=snippet`)
+      .then((result) => result).catch((error) => {
+        throw new Meteor.Error('500', `${error.message}`)
+      })
   }
 });

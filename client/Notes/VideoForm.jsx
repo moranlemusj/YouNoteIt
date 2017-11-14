@@ -27,20 +27,26 @@ export default class VideoForm extends Component {
   }
 
   onLoad = (event) => {
-    try {
-      // console.log('load player',event.target.getVideoData());
-      if (event.target.getVideoData().video_id) {
-        event.target.seekTo(1, true);
-        this.props.onSetPlayer(event.target);
+    const x = Meteor.call('getVideoData', this.state.url, (error, response) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger')
       } else {
-        this.setState({
-          url: ''
-        });
-        throw new Meteor.Error('Invalid link');
+        try {
+          if (response.data.items.length !== 0) {
+            event.target.seekTo(1, true);
+            this.props.onSetPlayer(event.target);
+            this.props.setVideoData(response.data.items[0].snippet.title, response.data.items[0].snippet.channelTitle)
+          } else {
+            this.setState({
+              url: ''
+            });
+            throw new Meteor.Error('Invalid link');
+          }
+        } catch (e) {
+          Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
+        }
       }
-    } catch (e) {
-      Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
-    }
+    })
   }
 
   componentDidMount() {

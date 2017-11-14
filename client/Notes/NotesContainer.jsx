@@ -75,7 +75,10 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   
   setPlayer = (player) => {
     this.setState({ player });
-    console.log('state set', this.state)
+  }
+
+  setVideoData = (title, author) => {
+    this.setState({title, author});
   }
   
   render() {
@@ -83,14 +86,15 @@ export default class NotesContainer extends TrackerReact(React.Component) {
       <div>
         {(this.state.player && this.props.id) ? 
             <div> 
-              <h1> {this.state.player.getVideoData().title} </h1>
-              <h4> {this.state.player.getVideoData().author}</h4>
+              <h1> {this.state.title} </h1>
+              <h4> {this.state.author}</h4>
             </div> : <h1>Enter video url</h1>}
         <VideoForm className = 'circular'
                    setVideo = {this.setVideo.bind(this)} 
                    initialUrl = {this.props.id}
                    player={this.state.player}
-                   onSetPlayer={this.setPlayer} />
+                   onSetPlayer={this.setPlayer}
+                   setVideoData = {this.setVideoData} />
         <br />
         <br />
         <NoteForm className = 'circular'
