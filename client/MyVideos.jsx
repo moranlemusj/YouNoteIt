@@ -6,7 +6,7 @@ import SingleVideo from './SingleVideo.jsx';
 export default class MyVideos extends TrackerReact(Component) {
   constructor() {
     super();
-    
+
     this.state =  {
       //"notes:" doesn't matter
       subscription: {
@@ -17,13 +17,14 @@ export default class MyVideos extends TrackerReact(Component) {
       time: 0,
     }
   }
-  
+
   componentWillUnmount() {
     this.state.subscription.videos.stop();
   }
 
   uniqueVideos() {
     let nts = Notes.find().fetch();
+    console.log(nts);
     let videos = {};
     nts.forEach(note => {
       videos[note.title] ? (videos[note.title]['counter'] += 1) : (videos[note.title] = {counter: 1, id: note.video} );
