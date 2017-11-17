@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Moment from 'react-moment';
 export default class NoteForm extends Component {
   addNote(event) {
     event.preventDefault();
@@ -11,13 +10,7 @@ export default class NoteForm extends Component {
     let time = (secs > 0) ? secs : 0;
     let video = this.props.video;
     let update = false;
-    console.log("secs", secs)
-    console.log("-------")
-    console.log("gap", this.props.gap)
-    console.log("-------")
-    console.log("gap sec", this.props.gap / 1000)
-    console.log("-------")
-    console.log("getCurrentTime", this.props.player.getCurrentTime())
+    console.log("TIME", time)
     Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
       if (error) {
         Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
@@ -36,7 +29,6 @@ export default class NoteForm extends Component {
                     <div></div>
     return (
       <div>
-        <Moment format="mm:ss">{this.props.gap}</Moment>
         {notef}
       </div>
     )
