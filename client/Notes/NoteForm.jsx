@@ -5,7 +5,6 @@ export default class NoteForm extends Component {
     event.preventDefault();
     console.log(this.props.id)
     let vidId = this.props.id;
-    let rewind = this.props.seconds.value;
     let title = this.props.title;
     let text = this.refs.note.value.trim();
     let secs = Math.round(this.props.player.getCurrentTime() - (this.props.gap / 1000));
