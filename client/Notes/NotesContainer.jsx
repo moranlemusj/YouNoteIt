@@ -24,6 +24,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
       time: 0,
       gap: 0,
       startRecord: 0,
+      noteValue: '',
     }
 
     this.togglePlayEventListener = Keypress("cmd /", this.stopV.bind(this));
@@ -34,11 +35,42 @@ export default class NotesContainer extends TrackerReact(React.Component) {
   }
 
   recordText = (e) => {
-    if (!this.state.startRecord) this.setState({startRecord : Date.now()});
+    if (!this.state.startRecord) this.setState({
+      startRecord : Date.now(),
+    });
+    if (e.keyCode == 27) console.log("TAPPOOOOO")
+    this.setState({
+      noteValue: this.state.noteValue + e.key
+    });
     if (e.keyCode === 13) {
       const gap = Date.now() - this.state.startRecord;
-      this.setState({gap : gap})
-      this.setState({startRecord : 0})
+      console.log('GAP', gap, Date.now(), this.state.startRecord);
+      this.setState({
+        // gap : gap,
+        startRecord : 0
+      });
+    console.log("target value",e.target.value);
+
+
+
+      let vidId = this.state.id;
+      let title = this.state.title;
+      let text = this.state.noteValue.trim();
+      let secs = Math.round(this.state.player.getCurrentTime() - (gap / 1000));
+      let time = (secs > 0) ? secs : 0;
+      let video = this.state.currentVideo;
+      let update = false;
+      console.log("gap", gap / 1000)
+      console.log("-----")
+      Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
+        if (error) {
+          Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
+        } else {
+          this.setState({
+            noteValue: ''
+          });
+        }
+      });
     }
   }
 
@@ -108,13 +140,10 @@ export default class NotesContainer extends TrackerReact(React.Component) {
         <br />
         <br />
         <NoteForm className = 'circular'
-                  video = {this.state.currentVideo}
-                  time = {this.state.time}
                   player = {this.state.player}
-                  title = {this.state.title}
                   id = {this.props.id}
-                  gap = {this.state.gap}
                   typedStr={this.recordText}
+                  text={this.state.noteValue}
                   />
         {(this.state.player && this.props.id) ?
           <div className = 'rewind'>
