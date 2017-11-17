@@ -1,6 +1,7 @@
 import React from 'react';
 import AccountsUI from '../AccountsUI.jsx';
 import { Accounts } from 'meteor/accounts-base';
+import 'bootstrap/dist/css/bootstrap.css';
 
 Accounts.ui.config({
   passwordSignupFields:'USERNAME_ONLY'
