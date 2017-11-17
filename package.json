@@ -6,17 +6,19 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "bootstrap": "^4.0.0-beta",
     "meteor-node-stubs": "^0.3.2",
-    "react": "^16.0.0",
+    "react": "^16.1.1",
     "react-addons": "^0.9.1-deprecated",
     "react-addons-create-fragment": "^15.6.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-linked-state-mixin": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.1.1",
     "react-keypress": "^0.1.5",
     "react-mounter": "^1.2.0",
-    "react-youtube": "^7.5.0"
+    "react-youtube": "^7.5.0",
+    "reactstrap": "^5.0.0-alpha.4"
   },
   "version": "1.0.0",
   "main": "index.js",

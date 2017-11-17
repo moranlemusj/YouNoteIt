@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
-
+import { Container, Row } from 'reactstrap';
 import SingleVideo from './SingleVideo.jsx';
 
 export default class MyVideos extends TrackerReact(Component) {
@@ -38,15 +38,16 @@ export default class MyVideos extends TrackerReact(Component) {
 
   render() {
     return (
-      <div>
-        <ul>
+      <Container>
+
+        <Row>
           {this.uniqueVideos().map(video =>
           <SingleVideo key = {video.vidId}
                        video = {video}
                        player = {this.state.player} />
           )}
-        </ul>
-      </div>
+        </Row>
+      </Container>
     )
   }
 }
