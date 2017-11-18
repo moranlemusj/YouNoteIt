@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Moment from 'react-moment';
 
 export default class NoteSingle extends Component {
   constructor() {
@@ -19,7 +20,7 @@ export default class NoteSingle extends Component {
     this.setState({update: true})
     this.props.note.update = !this.props.note.update;
   }
-  
+
   updateText() {
     this.updateNote();
     Meteor.call('updateText', this.props.note._id, this.refs.note.value.trim());
@@ -29,7 +30,7 @@ export default class NoteSingle extends Component {
     const marker = (this.props.note.text) ? <div><span className= "boldThis"> Note: </span> {this.props.note.text}</div> :
       <span className = "boldThis"> ----- Marker ----- </span>
     const notes = (this.props.note.update) ?
-    <li>         
+    <li>
       <form className="new-note" onSubmit={this.updateText.bind(this)}>
         <input type="text" ref="note"
               defaultValue={this.props.note.text} />
@@ -43,7 +44,7 @@ export default class NoteSingle extends Component {
             <button className = "btn-cancel cancel" onClick={this.deleteNote.bind(this)}> &times; </button>
         </div>
         <div className = "time">
-          time: {this.props.note.seconds} seconds
+          time: <Moment format="mm:ss">{this.props.note.seconds * 1000}</Moment>
           <button className = "goButton" onClick={this.sendToVideo.bind(this)}> Go! </button>
           <button className = "goButton" onClick={this.updateNote.bind(this)}> Update! </button>
 

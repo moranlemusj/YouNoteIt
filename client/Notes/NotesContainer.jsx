@@ -22,13 +22,49 @@ export default class NotesContainer extends TrackerReact(React.Component) {
       currentVideo: '',
       player: null,
       time: 0,
+      gap: 0,
+      startRecord: 0,
+      noteValue: '',
     }
-
     this.togglePlayEventListener = Keypress("cmd /", this.stopV.bind(this));
   }
 
   statePlayerMe() {
     return this.state.player;
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const gap = Date.now() - this.state.startRecord;
+    console.log('GAP', gap, Date.now(), this.state.startRecord);
+    this.setState({
+      startRecord : 0,
+      noteValue: ''
+    });
+    let vidId = this.state.id;
+    let title = this.state.title;
+    let text = this.state.noteValue.trim();
+    let secs = Math.round(this.state.player.getCurrentTime() - (gap / 1000));
+    let time = (secs > 0) ? secs : 0;
+    let video = this.state.currentVideo;
+    let update = false;
+    Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
+      if (error) {
+        Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
+      } else {
+        this.setState({
+          noteValue: ''
+        });
+      }
+    });
+  }
+  recordText = (e) => {
+    if (!this.state.startRecord) this.setState({
+      startRecord : Date.now(),
+    });
+    this.setState({
+      noteValue: e.target.value
+    });
   }
 
   stopV() {
@@ -97,16 +133,16 @@ export default class NotesContainer extends TrackerReact(React.Component) {
         <br />
         <br />
         <NoteForm className = 'circular'
-                  video = {this.state.currentVideo}
-                  time = {this.state.time}
                   player = {this.state.player}
-                  title = {this.state.title}
                   id = {this.props.id}
-                  seconds = {this.refs.time} />
+                  typedStr={this.recordText}
+                  text={this.state.noteValue}
+                  onSubmit={this.onSubmit}
+                  />
+
         {(this.state.player && this.props.id) ?
           <div className = 'rewind'>
             <div className = 'title'><h3> Notes for Video</h3></div>
-            <div className = 'rewind2'><h5> Rewind: </h5> <input ref='time' type='number' defaultValue={15} /></div>
           </div> :
         <div>
 
