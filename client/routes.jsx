@@ -16,7 +16,7 @@ FlowRouter.route('/', {
       content: (
         <div>
           <NotesContainer />
-          <MyVideos />
+          <MyVideos limit={3}/>
         </div>
       )
     })
@@ -56,7 +56,7 @@ FlowRouter.route('/home/', {
 FlowRouter.route('/videos', {
   action() {
     mount(MainLayout, {
-      content: (<MyVideos />)
+      content: (<MyVideos limit={'all'}/>)
     })
   }
 });

@@ -15,6 +15,7 @@ export default class MyVideos extends TrackerReact(Component) {
       currentVideo: '',
       player: false,
       time: 0,
+
     }
   }
 
@@ -36,17 +37,32 @@ export default class MyVideos extends TrackerReact(Component) {
   }
 
   render() {
-    console.log('num', this.props, 'state', this.state);
+    let numVideos = this.props.limit;
+    let listedVideo = []
+    if (this.props.limit === 'all')
+      numVideos = this.uniqueVideos().length
+
+    for (let i = 0; i < numVideos; i++) {
+      listedVideo[i] = this.uniqueVideos()[i]
+    }
+
     return (
       <Container>
-
         <Row>
-          {
-            this.uniqueVideos().map(video =>
-          <SingleVideo key = {video.vidId}
-                       video = {video}
-                       player = {this.state.player} />
-          )}
+
+        {
+
+            listedVideo.map(video => {
+              if (!video) return null
+              return (
+                <SingleVideo
+                key = {video.vidId}
+                video = {video}
+                player = {this.state.player} />
+              )
+            }
+          )
+        }
         </Row>
       </Container>
     )
