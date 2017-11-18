@@ -139,19 +139,13 @@ export default class NotesContainer extends TrackerReact(React.Component) {
                   text={this.state.noteValue}
                   onSubmit={this.onSubmit}
                   />
+
         {(this.state.player && this.props.id) ?
           <div className = 'rewind'>
             <div className = 'title'><h3> Notes for Video</h3></div>
           </div> :
         <div>
-          <div className = "comicRow">
-            <img src="./images/1.jpg" height="200" />
-            <img src="./images/2.jpg" height="200" />
-          </div>
-          <div className = "comicRow">
-            <img src="./images/3.jpg" height="200" />
-            <img src="./images/4.jpg" height="200" />
-          </div>
+
         </div>}
         <ul className = "notes">
           {(this.state.player && this.props.id) ? this.notes().reverse().map( note =>
