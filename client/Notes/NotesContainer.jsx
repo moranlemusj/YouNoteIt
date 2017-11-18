@@ -7,6 +7,10 @@ import Keypress from 'react-keypress';
 import NoteForm from './NoteForm.jsx';
 import NoteSingle from './NoteSingle.jsx';
 import VideoForm from './VideoForm.jsx';
+
+import { Container, Row, Col } from 'reactstrap';
+import '../styles/video.css'
+
 // substitute resolution with note
 Notes = new Mongo.Collection('notes');
 
@@ -119,42 +123,54 @@ export default class NotesContainer extends TrackerReact(React.Component) {
 
   render() {
     return (
-      <div>
-        {(this.state.player && this.props.id) ?
-            <div>
-              <h1> {this.state.title} </h1>
-              <h4> {this.state.author}</h4>
-            </div> : <h1>Enter video url</h1>}
-        <VideoForm className = 'circular'
-                   setVideo = {this.setVideo.bind(this)}
-                   initialUrl = {this.props.id}
-                   onSetPlayer={this.setPlayer}
-                   setVideoData = {this.setVideoData} />
-        <br />
-        <br />
-        <NoteForm className = 'circular'
-                  player = {this.state.player}
-                  id = {this.props.id}
-                  typedStr={this.recordText}
-                  text={this.state.noteValue}
-                  onSubmit={this.onSubmit}
-                  />
+      <Container className="video">
+        <Row>
+          <Col md="7">
+            <VideoForm className = 'video__video-wrap'
+                       setVideo = {this.setVideo.bind(this)}
+                       initialUrl = {this.props.id}
+                       onSetPlayer={this.setPlayer}
+                       setVideoData = {this.setVideoData}
+            />
+          </Col>
+          <Col md="5">
+            <div className="video__description">
+              <div className="video__header">
+                {(this.state.player && this.props.id)
+                  ?
+                    <div>
+                      <h2 className="video__title"> {this.state.title} </h2>
+                      <h4 className="video__author"> {this.state.author}</h4>
+                    </div>
+                  :
+                  <h3 className="page__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus ex ac diam malesuada consequat. Sed diam felis, pulvinar ac tincidunt in, scelerisque vel massa.</h3>}
+              </div>
+              <div className="video__action">
+                <NoteForm className = 'video__note-form'
+                          player = {this.state.player}
+                          id = {this.props.id}
+                          typedStr={this.recordText}
+                          text={this.state.noteValue}
+                          onSubmit={this.onSubmit}
+                />
+              </div>
+            </div>
+          </Col>
+        </Row>
 
-        {(this.state.player && this.props.id) ?
-          <div className = 'rewind'>
-            <div className = 'title'><h3> Notes for Video</h3></div>
-          </div> :
-        <div>
+        {(this.state.player && this.props.id)
+          ?
+            <h3 className = "note__main-title"> Notes for Video</h3>
+          : <div></div>}
 
-        </div>}
-        <ul className = "notes">
+        <Row className = "notes">
           {(this.state.player && this.props.id) ? this.notes().reverse().map( note =>
             <NoteSingle key = {note._id}
                         note = {note}
                         player = {this.state.player} />
           ) : <div></div> }
-        </ul>
-      </div>
+        </Row>
+      </Container>
     )
   }
 }
