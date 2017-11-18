@@ -16,6 +16,7 @@
     "react-addons-linked-state-mixin": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-dom": "^16.1.1",
+    "react-fontawesome": "^1.6.1",
     "react-keypress": "^0.1.5",
     "react-moment": "^0.6.8",
     "react-mounter": "^1.2.0",
