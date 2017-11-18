@@ -24,7 +24,6 @@ export default class MyVideos extends TrackerReact(Component) {
 
   uniqueVideos() {
     let nts = Notes.find().fetch();
-    console.log(nts);
     let videos = {};
     nts.forEach(note => {
       videos[note.title] ? (videos[note.title]['counter'] += 1) : (videos[note.title] = {counter: 1, id: note.video} );
@@ -37,11 +36,13 @@ export default class MyVideos extends TrackerReact(Component) {
   }
 
   render() {
+    console.log('num', this.props, 'state', this.state);
     return (
       <Container>
 
         <Row>
-          {this.uniqueVideos().map(video =>
+          {
+            this.uniqueVideos().map(video =>
           <SingleVideo key = {video.vidId}
                        video = {video}
                        player = {this.state.player} />

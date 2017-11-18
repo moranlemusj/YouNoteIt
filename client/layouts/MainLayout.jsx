@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/main-layout.css';
 import { Container, Col, Row } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
+import {mount} from 'react-mounter';
+import MyVideos from '../MyVideos.jsx';
 Accounts.ui.config({
   passwordSignupFields:'USERNAME_ONLY'
 })
@@ -15,7 +17,6 @@ export const MainLayout = ({content}) => (
     <header className='header'>
       <Container>
         <Row>
-
             <Col lg='4'>
               Logo
             </Col>
@@ -30,7 +31,6 @@ export const MainLayout = ({content}) => (
                 <AccountsUI />
               </div>
           </Col>
-
         </Row>
       </Container>
     </header>
@@ -38,5 +38,7 @@ export const MainLayout = ({content}) => (
 
       {content}
     </main>
+
+
   </div>
 )

@@ -13,9 +13,14 @@ FlowRouter.route('/', {
   triggersEnter: [reloadCheck],
   action() {
     mount(MainLayout, {
-      content: (<NotesContainer />)
+      content: (
+        <div>
+          <NotesContainer />
+          <MyVideos />
+        </div>
+      )
     })
-  },  
+  },
   triggersExit: [routeCleanup]
 });
 
