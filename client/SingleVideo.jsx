@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Col, Button } from 'reactstrap';
+import { Col } from 'reactstrap';
 import './styles/my-video.css'
 
 export default class SingleVideo extends Component {

@@ -1,0 +1,36 @@
+.video {
+}
+
+.video iframe  {
+  width: 100%;
+}
+
+.video__wrap-video {
+  height: 100%;
+}
+
+.video__wrap-video--centered {
+  display: flex;
+  align-items: center;
+}
+
+.video__title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.video__author {
+  font-size: 18px;
+  color: #A8152A;
+}
+
+.video__description {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.video__action {
+  margin-bottom: 6px;
+}

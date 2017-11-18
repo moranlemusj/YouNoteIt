@@ -39,7 +39,6 @@ export default class MyVideos extends TrackerReact(Component) {
   render() {
     return (
       <Container>
-
         <Row>
           {this.uniqueVideos().map(video =>
           <SingleVideo key = {video.vidId}
