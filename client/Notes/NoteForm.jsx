@@ -4,11 +4,15 @@ export default class NoteForm extends Component {
   render() {
     const notef = (this.props.player && this.props.id)
       ? (
-        <div className="new-note">
-          <input onKeyUp={this.props.typedStr} type="text" ref="note"
-                placeholder="Jot it down, press Enter to record!"
-                value={this.props.text}/>
-        </div>
+        <form onSubmit={this.props.onSubmit} className="new-note">
+          <input
+            onChange={this.props.typedStr}
+            type="text"
+            ref="note"
+            value={this.props.text}
+            placeholder="Jot it down, press Enter to record!"
+          />
+        </form>
       )
       : <div />
 

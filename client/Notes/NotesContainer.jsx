@@ -26,7 +26,6 @@ export default class NotesContainer extends TrackerReact(React.Component) {
       startRecord: 0,
       noteValue: '',
     }
-
     this.togglePlayEventListener = Keypress("cmd /", this.stopV.bind(this));
   }
 
@@ -34,44 +33,38 @@ export default class NotesContainer extends TrackerReact(React.Component) {
     return this.state.player;
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    const gap = Date.now() - this.state.startRecord;
+    console.log('GAP', gap, Date.now(), this.state.startRecord);
+    this.setState({
+      startRecord : 0,
+      noteValue: ''
+    });
+    let vidId = this.state.id;
+    let title = this.state.title;
+    let text = this.state.noteValue.trim();
+    let secs = Math.round(this.state.player.getCurrentTime() - (gap / 1000));
+    let time = (secs > 0) ? secs : 0;
+    let video = this.state.currentVideo;
+    let update = false;
+    Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
+      if (error) {
+        Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
+      } else {
+        this.setState({
+          noteValue: ''
+        });
+      }
+    });
+  }
   recordText = (e) => {
     if (!this.state.startRecord) this.setState({
       startRecord : Date.now(),
     });
-    if (e.keyCode == 27) console.log("TAPPOOOOO")
     this.setState({
-      noteValue: this.state.noteValue + e.key
+      noteValue: e.target.value
     });
-    if (e.keyCode === 13) {
-      const gap = Date.now() - this.state.startRecord;
-      console.log('GAP', gap, Date.now(), this.state.startRecord);
-      this.setState({
-        // gap : gap,
-        startRecord : 0
-      });
-    console.log("target value",e.target.value);
-
-
-
-      let vidId = this.state.id;
-      let title = this.state.title;
-      let text = this.state.noteValue.trim();
-      let secs = Math.round(this.state.player.getCurrentTime() - (gap / 1000));
-      let time = (secs > 0) ? secs : 0;
-      let video = this.state.currentVideo;
-      let update = false;
-      console.log("gap", gap / 1000)
-      console.log("-----")
-      Meteor.call('addNote', text, time, video, title, vidId, update, (error, data) => {
-        if (error) {
-          Bert.alert('Invalid link!', 'danger', 'fixed-top', 'fa-frown-o');
-        } else {
-          this.setState({
-            noteValue: ''
-          });
-        }
-      });
-    }
   }
 
   stopV() {
@@ -144,6 +137,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
                   id = {this.props.id}
                   typedStr={this.recordText}
                   text={this.state.noteValue}
+                  onSubmit={this.onSubmit}
                   />
         {(this.state.player && this.props.id) ?
           <div className = 'rewind'>
