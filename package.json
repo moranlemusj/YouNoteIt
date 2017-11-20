@@ -2,10 +2,12 @@
   "name": "padtube",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
     "bootstrap": "^4.0.0-beta",
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.19.2",
@@ -25,7 +27,9 @@
   },
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "selenium-webdriver": "^3.0.0-beta-2"
+  },
   "author": "",
   "license": "ISC",
   "description": ""

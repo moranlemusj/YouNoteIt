@@ -31,3 +31,5 @@ themeteorchef:bert
 
 http
 practicalmeteor:mocha
+meteortesting:mocha
+practicalmeteor:chai
