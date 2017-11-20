@@ -33,3 +33,4 @@ http
 practicalmeteor:mocha
 meteortesting:mocha
 practicalmeteor:chai
+accounts-facebook
