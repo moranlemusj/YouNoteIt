@@ -13,9 +13,14 @@ FlowRouter.route('/', {
   triggersEnter: [reloadCheck],
   action() {
     mount(MainLayout, {
-      content: (<NotesContainer />)
+      content: (
+        <div>
+          <NotesContainer />
+          <MyVideos limit={3}/>
+        </div>
+      )
     })
-  },  
+  },
   triggersExit: [routeCleanup]
 });
 
@@ -51,7 +56,7 @@ FlowRouter.route('/home/', {
 FlowRouter.route('/videos', {
   action() {
     mount(MainLayout, {
-      content: (<MyVideos />)
+      content: (<MyVideos limit={'all'}/>)
     })
   }
 });
