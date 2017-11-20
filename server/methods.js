@@ -1,4 +1,3 @@
-
 //methods that can be called from client side
 import { HTTP } from 'meteor/http';
 
