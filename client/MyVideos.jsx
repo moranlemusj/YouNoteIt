@@ -42,9 +42,10 @@ export default class MyVideos extends TrackerReact(Component) {
     if (this.props.limit === 'all')
       numVideos = this.uniqueVideos().length
 
-    for (let i = 0; i < numVideos; i++) {
+    for (let i = this.uniqueVideos().length - numVideos; i <= this.uniqueVideos().length; i++) {
       listedVideo[i] = this.uniqueVideos()[i]
     }
+
 
     return (
       <Container>
@@ -52,7 +53,7 @@ export default class MyVideos extends TrackerReact(Component) {
 
         {
 
-            listedVideo.map(video => {
+            listedVideo.sort((a,b) => a-b).map(video => {
               if (!video) return null
               return (
                 <SingleVideo
