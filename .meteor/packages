@@ -31,6 +31,10 @@ themeteorchef:bert
 
 http
 practicalmeteor:mocha
+
+meteortesting:mocha
+practicalmeteor:chai
 service-configuration
 accounts-google
 google-config-ui
+
