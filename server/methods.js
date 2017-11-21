@@ -49,7 +49,7 @@ Meteor.methods({
     return callService(
       'GET',
       `https://www.googleapis.com/youtube/v3/videos?id=${url}&key=AIzaSyBRrQmXEXUOOYkXW_sa7Gd5dGJJkEbiT_Q&fields=items(snippet)&part=snippet`)
-      .then(result => JSON.parse(result.content).items[0].snippet)
+      .then(result => result)
       .catch((error) => {
         throw new Meteor.Error('500', `${error.message}`)
       })
