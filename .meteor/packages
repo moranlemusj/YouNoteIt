@@ -31,6 +31,10 @@ themeteorchef:bert
 
 http
 practicalmeteor:mocha
+
 meteortesting:mocha
 practicalmeteor:chai
-accounts-facebook
+service-configuration
+accounts-google
+google-config-ui
+
