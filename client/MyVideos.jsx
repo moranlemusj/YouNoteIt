@@ -36,6 +36,10 @@ export default class MyVideos extends TrackerReact(Component) {
     return videosArray;
   }
 
+  checkTitle = (listedVideo) => {
+    if (listedVideo.sort((a,b)=>a-b)[0])
+      return <h2 className='page__title page__title--video'>Your latest video</h2>    
+  }
   render() {
     let numVideos = this.props.limit;
     let listedVideo = []
@@ -49,6 +53,7 @@ export default class MyVideos extends TrackerReact(Component) {
 
     return (
       <Container>
+        {this.checkTitle(listedVideo)}
         <Row>
 
         {
@@ -56,6 +61,7 @@ export default class MyVideos extends TrackerReact(Component) {
             listedVideo.sort((a,b) => a-b).map(video => {
               if (!video) return null
               return (
+
                 <SingleVideo
                 key = {video.vidId}
                 video = {video}

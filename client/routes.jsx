@@ -16,7 +16,6 @@ FlowRouter.route('/', {
       content: (
         <div>
           <NotesContainer />
-          <h2 className='page__title page__title--video'>Your latest video</h2>
           <MyVideos limit={3}/>
         </div>
       )
