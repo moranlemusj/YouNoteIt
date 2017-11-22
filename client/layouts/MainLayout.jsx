@@ -7,6 +7,7 @@ import { Container, Col, Row } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import {mount} from 'react-mounter';
 import MyVideos from '../MyVideos.jsx';
+
 Accounts.ui.config({
   passwordSignupFields:'USERNAME_ONLY'
 })
@@ -18,16 +19,14 @@ export const MainLayout = ({content}) => (
       <Container>
         <Row>
             <Col lg='4'>
-              Logo
+              <a className='header__link' href = "/">
+                <img src="../images/logo.png" height="40" />
+              </a>
             </Col>
             <Col lg='4' />
             <Col lg='4'>
               <div className='header__menu'>
                 <a className='header__link' href = "/videos/">My Videos</a>
-                <FontAwesome
-                  name='user'
-                  size='1x'
-                />
                 <AccountsUI />
               </div>
           </Col>
