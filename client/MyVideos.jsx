@@ -37,8 +37,11 @@ export default class MyVideos extends TrackerReact(Component) {
   }
 
   checkTitle = (listedVideo) => {
-    if (listedVideo.sort((a,b)=>a-b)[0])
-      return <h2 className='page__title page__title--video'>Your latest video</h2>    
+    if (listedVideo.sort((a,b)=>a-b)[0] && FlowRouter.current().path.match('/videos/')) {
+      return <h2 className='page__title page__title--video'>Your videos</h2>
+    } else if (listedVideo.sort((a,b)=>a-b)[0]) {
+      return <h2 className='page__title page__title--video'>Your latest videos</h2>  
+    }
   }
   render() {
     let numVideos = this.props.limit;

@@ -143,7 +143,7 @@ export default class NotesContainer extends TrackerReact(React.Component) {
                       <h4 className="video__author"> {this.state.author}</h4>
                     </div>
                   :
-                  <h3 className="page__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus ex ac diam malesuada consequat. Sed diam felis, pulvinar ac tincidunt in, scelerisque vel massa.</h3>}
+                  <h3 className="page__title">Insert a youtube URL and start taking notes</h3>}
               </div>
               <div className="video__action">
                 <NoteForm className = 'video__note-form'
