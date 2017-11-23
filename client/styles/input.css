@@ -1,0 +1,19 @@
+.input {
+  border: 0;
+  box-shadow: 0px 0px 9px 3px rgba(0,0,0,0.1);
+  padding: 12px;
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  outline: none;
+  transition: box-shadow 0.35s ease;
+}
+
+.input:focus {
+  box-shadow: 0px 0px 9px 3px rgba(0,0,0,0.4);
+}
+
+.input--main {
+  padding: 18px;
+  font-size: 20px;
+}

@@ -1,6 +1,6 @@
-
 //methods that can be called from client side
 import { HTTP } from 'meteor/http';
+import Notes from './notes'
 
 const callService = (type, url, options) => new Promise((resolve, reject) => {
   HTTP.call(type, url, (error, result) => {
@@ -49,7 +49,8 @@ Meteor.methods({
     return callService(
       'GET',
       `https://www.googleapis.com/youtube/v3/videos?id=${url}&key=AIzaSyBRrQmXEXUOOYkXW_sa7Gd5dGJJkEbiT_Q&fields=items(snippet)&part=snippet`)
-      .then((result) => result).catch((error) => {
+      .then(result => result)
+      .catch((error) => {
         throw new Meteor.Error('500', `${error.message}`)
       })
   }

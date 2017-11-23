@@ -1,4 +1,4 @@
-Notes = new Mongo.Collection("notes");
+import Notes from './notes'
 //if susbscribe to allNotes, gives me all notes.
 
 Meteor.publish('usersVideos', function() {

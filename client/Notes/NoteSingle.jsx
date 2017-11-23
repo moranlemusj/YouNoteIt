@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Moment from 'react-moment';
+import { Col, Row, Button } from 'reactstrap';
 
 export default class NoteSingle extends Component {
   constructor() {
@@ -19,40 +21,44 @@ export default class NoteSingle extends Component {
     this.setState({update: true})
     this.props.note.update = !this.props.note.update;
   }
-  
+
   updateText() {
     this.updateNote();
     Meteor.call('updateText', this.props.note._id, this.refs.note.value.trim());
     this.setState({update: false});
   }
   render () {
-    const marker = (this.props.note.text) ? <div><span className= "boldThis"> Note: </span> {this.props.note.text}</div> :
-      <span className = "boldThis"> ----- Marker ----- </span>
-    const notes = (this.props.note.update) ?
-    <li>         
+    const marker = (this.props.note.text) ?
+    <p className="note__text">{this.props.note.text}</p>
+    :
+    <p className="note__marker"> ----- Marker ----- </p>
+
+    const notes = (this.props.note.update)
+    ?
+    <div>
       <form className="new-note" onSubmit={this.updateText.bind(this)}>
-        <input type="text" ref="note"
+        <h5>Update note:</h5>
+        <input className="input" type="text" ref="note"
               defaultValue={this.props.note.text} />
       </form>
-    </li> :
-    <li>
-        <div className="note">
-          <div className="singleNote">
-              {marker}
-          </div>
-            <button className = "btn-cancel cancel" onClick={this.deleteNote.bind(this)}> &times; </button>
+    </div>
+    :
+    <div className="note">
+        <div className="note__description" onClick={this.sendToVideo.bind(this)}>
+          {marker}
         </div>
-        <div className = "time">
-          time: {this.props.note.seconds} seconds
-          <button className = "goButton" onClick={this.sendToVideo.bind(this)}> Go! </button>
-          <button className = "goButton" onClick={this.updateNote.bind(this)}> Update! </button>
-
+        <div className = "note__time">
+          <span>time:</span> <Moment format="mm:ss">{this.props.note.seconds * 1000}</Moment>
         </div>
-      </li>
-    return (
-      <div>
-        {notes}
+        <div className="note__action">
+          <button className = "button button--note button--update" onClick={this.updateNote.bind(this)}> Update </button>
+          <button className = "button button--note button--delete" onClick={this.deleteNote.bind(this)}> Delete </button>
+        </div>
       </div>
+    return (
+      <Col className="note__column" md="4">
+        {notes}
+      </Col>
     )
   }
 }

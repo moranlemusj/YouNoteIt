@@ -21,8 +21,8 @@ export default class VideoForm extends Component {
     let urlX = this.refs.vid.value.trim().replace(/\S*?=/,'');
     urlX = urlX.replace(/&\S*/,'');
     this.props.setVideo(urlX);
-    this.setState({ 
-      url: urlX 
+    this.setState({
+      url: urlX
     });
   }
 
@@ -63,16 +63,16 @@ export default class VideoForm extends Component {
   }
 
   render() {
-    const video = (this.state.url && Meteor.userId()) ?
-          <YouTube ref="player" videoId={this.state.url} 
-                   onReady={this.onLoad}></YouTube> : 
-          <form className="new-note" onSubmit={this.addVideo} >
-            <input type="text" ref="vid"
-            placeholder="https://www.youtube.com/..." />
-          </form>
+    const video = (this.state.url && Meteor.userId())
+    ?
+      <YouTube ref="player" videoId={this.state.url} onReady={this.onLoad}></YouTube>
+    :
+    <form className="video__wrap-video video__wrap-video--centered" onSubmit={this.addVideo} >
+      <input className="input input--main" type="text" ref="vid" placeholder="https://www.youtube.com/..." />
+    </form>
 
     return (
-      <div>
+      <div className="video__wrap-video">
         {video}
       </div>
     )

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import TrackerReact from 'meteor/ultimatejs:tracker-react';
-
+import { Container, Row } from 'reactstrap';
 import SingleVideo from './SingleVideo.jsx';
 
 export default class MyVideos extends TrackerReact(Component) {
   constructor() {
     super();
-    
+
     this.state =  {
       //"notes:" doesn't matter
       subscription: {
@@ -15,9 +15,10 @@ export default class MyVideos extends TrackerReact(Component) {
       currentVideo: '',
       player: false,
       time: 0,
+
     }
   }
-  
+
   componentWillUnmount() {
     this.state.subscription.videos.stop();
   }
@@ -35,17 +36,45 @@ export default class MyVideos extends TrackerReact(Component) {
     return videosArray;
   }
 
+  checkTitle = (listedVideo) => {
+    if (listedVideo.sort((a,b)=>a-b)[0] && FlowRouter.current().path.match('/videos/')) {
+      return <h2 className='page__title page__title--video'>Your videos</h2>
+    } else if (listedVideo.sort((a,b)=>a-b)[0]) {
+      return <h2 className='page__title page__title--video'>Your latest videos</h2>  
+    }
+  }
   render() {
+    let numVideos = this.props.limit;
+    let listedVideo = []
+    if (this.props.limit === 'all')
+      numVideos = this.uniqueVideos().length
+
+    for (let i = this.uniqueVideos().length - numVideos; i <= this.uniqueVideos().length; i++) {
+      listedVideo[i] = this.uniqueVideos()[i]
+    }
+
+
     return (
-      <div>
-        <ul>
-          {this.uniqueVideos().map(video =>
-          <SingleVideo key = {video.vidId}
-                       video = {video}
-                       player = {this.state.player} />
-          )}
-        </ul>
-      </div>
+      <Container>
+        {this.checkTitle(listedVideo)}
+        <Row>
+
+        {
+
+            listedVideo.sort((a,b) => a-b).map(video => {
+              if (!video) return null
+              return (
+
+                <SingleVideo
+                key = {video.vidId}
+                video = {video}
+                player = {this.state.player} />
+              )
+            }
+          )
+        }
+        </Row>
+      </Container>
     )
   }
 }
