@@ -8,9 +8,15 @@
 
 > Home page: 
 
+>> ![Alt text](/public/images/homePage.png?raw=true)
+
 > Single video view: 
 
+>> ![Alt text](/public/images/singleVideo.png?raw=true)
+
 > Video Collection: 
+
+>> ![Alt text](/public/images/MyVideos.png?raw=true)
 
 ## Tech Stack
 
